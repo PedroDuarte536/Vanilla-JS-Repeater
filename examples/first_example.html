@@ -1,0 +1,24 @@
+<form action="" method="get">
+  <div id="age_repeater">
+    <div class="row">
+      <input type="number" name="age">
+      <button type="button" repeater-remove>Delete</button>
+    </div>
+  </div>
+
+  <button type="button" repeater-add>New Line</button>
+  <button type="button" repeater-add="age_repeater">New Line Repeater</button>
+  <button type="button" repeater-add="other_repeater">New Line Other Repeater</button>
+
+  <input type="submit" value="Send">
+</form>
+
+<script src="../dist/repeater.min.js"></script>
+<script>
+  let ageRepeater = document.getElementById("age_repeater");
+  ageRepeater.addEventListener('onLineAppend', (e) => console.log('Line appended, index: ' + e.detail.index));
+  ageRepeater.addEventListener('onLineRemove', (e) => console.log('Line removed, index: ' + e.detail.index));
+
+  let r = Repeater("age_repeater").addLine().addLine({ age: 10 });
+  r.removeLine(0);
+</script>

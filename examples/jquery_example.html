@@ -1,0 +1,24 @@
+<form action="" method="get">
+  <div id="age_repeater">
+    <div class="row" style="display: none">
+      <input type="number" name="age">
+      <button type="button" repeater-remove>Delete</button>
+    </div>
+  </div>
+
+  <button type="button" repeater-add>New Line</button>
+  <button type="button" repeater-add="age_repeater">New Line Repeater</button>
+  <button type="button" repeater-add="other_repeater">New Line Other Repeater</button>
+
+  <input type="submit" value="Send">
+</form>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="../dist/repeater.min.js"></script>
+<script>
+  let r = Repeater("age_repeater");
+  r.setRemoveLineWrapper((fn, line, idx) => $(line).fadeOut(300, fn))
+  r.setAddLineWrapper((fn) => $(fn()).fadeIn(300))
+  r.addLine().addLine({ age: 10 });
+  r.removeLine(0);
+</script>
